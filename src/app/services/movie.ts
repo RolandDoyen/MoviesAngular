@@ -22,7 +22,7 @@ export class MovieService {
       switchMap(() => {
         const headers = this.getHeaders();
         return this.http.get<Movie[]>(this.baseUrl, { headers })
-          .pipe(catchError(this.handleError));
+          .pipe(catchError(this.parseErrorResponse));
       })
     );
   }
@@ -33,7 +33,7 @@ export class MovieService {
       switchMap(() => {
         const headers = this.getHeaders(); // probablement Authorization header
         return this.http.get<Movie>(`${this.baseUrl}/${id}`, { headers })
-          .pipe(catchError(this.handleError));
+          .pipe(catchError(this.parseErrorResponse));
       })
     );
   }
@@ -44,7 +44,7 @@ export class MovieService {
       switchMap(() => {
         const headers = this.getHeaders();
         return this.http.post<void>(this.baseUrl, movie, { headers })
-          .pipe(catchError(this.handleError));
+          .pipe(catchError(this.parseErrorResponse));
       })
     );
   }
@@ -55,7 +55,7 @@ export class MovieService {
       switchMap(() => {
         const headers = this.getHeaders();
         return this.http.put<void>(`${this.baseUrl}/${id}`, movie, { headers })
-          .pipe(catchError(this.handleError));
+          .pipe(catchError(this.parseErrorResponse));
       })
     );
   }
@@ -66,7 +66,7 @@ export class MovieService {
       switchMap(() => {
         const headers = this.getHeaders();
         return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers })
-          .pipe(catchError(this.handleError));
+          .pipe(catchError(this.parseErrorResponse));
       })
     );
   }
@@ -81,16 +81,24 @@ export class MovieService {
   }
 
   /** Handle HTTP errors */
-  private handleError(error: HttpErrorResponse) {
+  private parseErrorResponse(error: HttpErrorResponse) {
     let errorMessage = `Error ${error.status}: `;
-
     if (error.error) {
-      if (error.error.errors) {
-        errorMessage += Object.values(error.error.errors).flat().join(' | ');
-      } else if (error.error.message) {
-        errorMessage += error.error.message;
-      } else if (typeof error.error === 'string') {
-        errorMessage += error.error;
+      let errorObj = error.error;
+      if (typeof error.error === 'string') {
+        try {
+          errorObj = JSON.parse(error.error);
+        } catch {
+          errorObj = { message: error.error };
+        }
+      }
+
+      if (errorObj.errors) {
+        errorMessage += Object.values(errorObj.errors).flat().join(' | ');
+      } else if (errorObj.title) {
+        errorMessage += errorObj.title;
+      } else if (errorObj.message) {
+        errorMessage += errorObj.message;
       } else {
         errorMessage += 'An unexpected error occurred.';
       }

@@ -68,11 +68,10 @@ export class EditMovieComponent implements OnInit {
         setTimeout(() => this.alertMessage = '', 5000);
       },
       error: (err) => {
-        console.warn('Ignored parse error:', err);
-        this.alertMessage = 'Movie updated successfully!';
-        this.alertType = 'success';
-
-        setTimeout(() => this.alertMessage = '', 5000);
+        this.alertMessage = err.message || 'Error updating movie';
+        this.alertType = 'error';
+        
+        setTimeout(() => this.alertMessage = '', 10000);
       }
     });
   }

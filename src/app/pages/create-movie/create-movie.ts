@@ -28,11 +28,11 @@ export class CreateMovieComponent {
         this.alertType = 'success';
         setTimeout(() => this.router.navigate(['/movies']), 2000);
       },
-      error: err => {
-        console.warn('Ignored parse error:', err);
-        this.alertMessage = 'Movie created successfully!';
-        this.alertType = 'success';
-        setTimeout(() => this.router.navigate(['/movies']), 2000);
+      error: (err) => {
+        this.alertMessage = err.message || 'Error creating movie';
+        this.alertType = 'error';
+        
+        setTimeout(() => this.alertMessage = '', 10000);
       }
     });
   }
