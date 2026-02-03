@@ -1,59 +1,102 @@
-# MoviesAngular
+# Movies Webapp (Angular)
+This is a modern **Angular 18** single-page application built with standalone components. It is designed to be a robust, enterprise-grade consumer for the Movies API, showcasing seamless integration between an Angular frontend and a .NET REST API backend with JWT authentication.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+> **Note:** This public repository is a polished version of the project for showcase purposes. Development and automated CI/CD pipelines to Azure are managed through a private repository, which explains the simplified commit history here.
 
-## Development server
 
-To start a local development server, run:
+## 📌 Table of Contents
+- [Movies Webapp (Angular)](#movies-webapp-angular)
+  - [📌 Table of Contents](#-table-of-contents)
+  - [🚀 Live Demo](#-live-demo)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [✨ Key Features](#-key-features)
+  - [🏛️ Architecture \& Philosophy](#️-architecture--philosophy)
+  - [⚙️ Environment Configuration](#️-environment-configuration)
+  - [🚀 Deployment](#-deployment)
+  - [⚙️ Installation \& Local Setup](#️-installation--local-setup)
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Live Demo
+**[👉 Visit Movies Webapp (Angular)](https://brave-forest-0e7abf903.1.azurestaticapps.net)**
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Tech Stack
+- **Frontend**: Angular 18 with standalone components architecture.
+- **Build Tool**: Angular CLI for development and optimized production builds.
+- **Routing**: Angular Router for client-side navigation and dynamic routing.
+- **UI/UX**: Bootstrap 5 for responsive design and consistent data-centric interfaces.
+- **State Management**: RxJS Observables and service-based state management.
+- **Communication**: REST API integration using Angular HttpClient with centralized JWT token management.
+- **DevOps**: GitHub Actions for automated CI/CD pipelines and continuous deployment.
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ✨ Key Features
+- **Standalone Components**: Modern Angular architecture with modular, reusable components.
+- **State Management**: Centralized JWT token handling and session management across the application.
+- **Responsive Design**: Mobile-first approach using Bootstrap 5 for consistent rendering across devices.
+- **Async API Communication**: Clean implementation of HttpClient with RxJS Observables and centralized error handling.
+- **Client-Side Routing**: Fast navigation without page reloads using Angular Router.
+- **Automated CI/CD**: Live deployment workflow ensuring the site is updated via GitHub Actions.
 
-```bash
-ng generate --help
-```
 
-## Building
+## 🏛️ Architecture & Philosophy
+- **Frontend**: Built with Angular 18 standalone components, emphasizing modularity and type safety.
+- **Component Structure**:
+  - `components/` - Reusable UI components (Navbar, Footer, Forms, Alerts)
+  - `pages/` - Route-specific page components
+  - `services/` - API communication layer with centralized fetch logic
+  - `utils/` - Helper functions and utilities
+  - `models/` - TypeScript interfaces for type safety
+**Communication**: Consumes REST services via Angular HttpClient with automatic JWT injection.
+**UI/UX**: Follows Bootstrap 5 design patterns for a clean, professional, and accessible interface.
 
-To build the project run:
 
-```bash
-ng build
-```
+## ⚙️ Environment Configuration
+The app automatically detects the hosting environment and configures API endpoints accordingly:
+- **Development (localhost)**: Points to `https://localhost:XXX/api/v2`
+- **Production**: Points to `https://moviesapi-rd.azurewebsites.net/api/v2`
+Configuration is handled in `src/app/services/token.ts` via hostname detection.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## 🚀 Deployment
+- **Platform**: Hosted on **Azure Static Web Application (Windows/Linux)**.
+- **CI/CD**: Fully automated deployment via **GitHub Actions** (triggered on push) for seamless integration.
+- **CORS Configuration**: Backend API is configured to authorize requests from the frontend domain.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
-```bash
-ng test
-```
+## ⚙️ Installation & Local Setup
+**Prerequisites**: Node.js 18+, npm/yarn, and Angular CLI.
 
-## Running end-to-end tests
+1. **Install Angular CLI globally (if not already installed)**
+  ```bash
+  npm install -g @angular/cli
+  ```
+  
+2. **Clone the repository**
+  ```bash
+  git clone https://github.com/RolandDoyen/MoviesAngularPublic.git
+  ```
 
-For end-to-end (e2e) testing, run:
+3. **Install dependencies**
+  ```bash
+   npm install
+  ```
+  
+4. **Configure the API Endpoint**
+   - The application automatically switches to `localhost:XXX` when detecting a local environment in `token.ts`.
+   - Ensure your Movies API is running at the address specified in `src/app/services/token.ts`.
+  
+5. **Run development server**
+  ```bash
+  ng serve
+  ```
 
-```bash
-ng e2e
-```
+6. **Build for production**
+  ```bash
+  ng build
+  ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+7. **Preview production build**
+  ```bash
+  ng serve --configuration production
+  ```
