@@ -1,0 +1,134 @@
+<form (ngSubmit)="onSubmit()" #movieForm="ngForm">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input 
+      type="text" 
+      id="title" 
+      class="form-control" 
+      [(ngModel)]="formData.title"
+      name="title"
+      maxlength="200"
+      required 
+    />
+  </div>
+  <div class="mb-3">
+    <label for="sypnosis" class="form-label">Synopsis</label>
+    <textarea 
+      id="sypnosis" 
+      class="form-control" 
+      [(ngModel)]="formData.sypnosis"
+      name="sypnosis"
+      maxlength="1000"
+      rows="4"
+    ></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="rating" class="form-label">Rating (0–10)</label>
+    <input 
+      type="number" 
+      id="rating" 
+      class="form-control" 
+      [(ngModel)]="formData.rating"
+      name="rating"
+      step="0.1"
+      min="0"
+      max="10"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="year" class="form-label">Release Year</label>
+    <input 
+      type="number" 
+      id="year" 
+      class="form-control" 
+      [(ngModel)]="formData.year"
+      name="year"
+      min="1930"
+      max="2030"
+      required 
+    />
+  </div>
+  <div class="mb-3">
+    <label for="length" class="form-label">Duration (minutes)</label>
+    <input 
+      type="number" 
+      id="length" 
+      class="form-control" 
+      [(ngModel)]="formData.length"
+      name="length"
+      min="0"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="trailerLink" class="form-label">Trailer Link (URL)</label>
+    <input 
+      type="url" 
+      id="trailerLink" 
+      class="form-control"
+      [(ngModel)]="formData.trailerLink"
+      name="trailerLink"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="styles" class="form-label">Styles (comma-separated)</label>
+    <input 
+      type="text" 
+      id="styles" 
+      class="form-control" 
+      [(ngModel)]="formData.styles"
+      name="styles"
+      placeholder="Action, Comedy, Drama..."
+    />
+  </div>
+  <div class="mb-3">
+    <label for="realisators" class="form-label">Realisators (comma-separated)</label>
+    <input 
+      type="text" 
+      id="realisators" 
+      class="form-control" 
+      [(ngModel)]="formData.realisators"
+      name="realisators"
+      placeholder="John Doe, Jane Smith..."
+    />
+  </div>
+  <div class="mb-3">
+    <label for="scenarists" class="form-label">Scenarists (comma-separated)</label>
+    <input 
+      type="text" 
+      id="scenarists" 
+      class="form-control" 
+      [(ngModel)]="formData.scenarists"
+      name="scenarists"
+      placeholder="John Doe, Jane Smith..."
+    />
+  </div>
+  <div class="mb-3">
+    <label for="actors" class="form-label">Actors (comma-separated)</label>
+    <input 
+      type="text" 
+      id="actors" 
+      class="form-control" 
+      [(ngModel)]="formData.actors"
+      name="actors"
+      placeholder="Actor 1, Actor 2..."
+    />
+  </div>
+  <div class="mb-3">
+    <label for="producers" class="form-label">Producers (comma-separated)</label>
+    <input 
+      type="text" 
+      id="producers" 
+      class="form-control" 
+      [(ngModel)]="formData.producers"
+      name="producers"
+      placeholder="Producer A, Producer B..."
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    {{ submitLabel }}
+  </button>
+  <button type="button" class="btn btn-danger ms-2" (click)="onCancel()">
+    Cancel
+  </button>
+</form>

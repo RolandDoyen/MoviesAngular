@@ -1,0 +1,41 @@
+<main class="container mt-4">
+  <!-- Loading state -->
+  <app-loading *ngIf="loading"></app-loading>
+
+  <!-- Edit form -->
+  <div *ngIf="!loading && movie" class="card p-3">
+    <h3>Edit Movie: {{ movie.title }}</h3>
+    
+    <app-movie-form
+      [initialData]="movie"
+      [submitLabel]="'Save'"
+      (formSubmit)="onSubmit($event)"
+      (formCancel)="onCancel()"
+    ></app-movie-form>
+
+    <button 
+      type="button" 
+      class="btn btn-danger mt-3"
+      (click)="onDelete()"
+    >
+      Delete
+    </button>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="!loading && !movie" class="alert alert-danger">
+    Movie not found
+    <button class="btn btn-secondary ms-3" (click)="onCancel()">
+      Back to Movies
+    </button>
+  </div>
+
+  <app-alert
+    [message]="alertMessage"
+    [type]="alertType"
+    (close)="closeAlert()"
+  ></app-alert>
+</main>
+
+<div id="message-success" class="alert alert-success d-none message-box"></div>
+<div id="message-error" class="alert alert-danger d-none message-box"></div>

@@ -1,0 +1,18 @@
+<main class="container mt-4">
+  <h2>Create a Movie</h2>
+  
+  <app-movie-form
+    [submitLabel]="'Create'"
+    (formSubmit)="onSubmit($event)"
+    (formCancel)="onCancel()"
+  ></app-movie-form>
+
+  <app-alert
+    [message]="alertMessage"
+    [type]="alertType"
+    (close)="closeAlert()"
+  ></app-alert>
+</main>
+
+<div id="message-success" class="alert alert-success d-none message-box"></div>
+<div id="message-error" class="alert alert-danger d-none message-box"></div>

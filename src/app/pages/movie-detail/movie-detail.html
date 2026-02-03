@@ -1,0 +1,49 @@
+<main class="container mt-4">
+  <div class="mb-3">
+    <a routerLink="/movies" class="btn btn-secondary">Back to Movies</a>
+  </div>
+
+  <!-- Loading state -->
+  <app-loading *ngIf="loading"></app-loading>
+
+  <!-- Error state -->
+  <div *ngIf="error && !loading" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Success state -->
+  <div *ngIf="movie && !loading && !error" class="card p-3">
+    <h3>{{ movie.title }}</h3>
+    <p><strong>Year:</strong> {{ movie.year }}</p>
+    <p><strong>Rating:</strong> {{ movie.rating }}</p>
+    <p><strong>Length:</strong> {{ movie.length }} minutes</p>
+    <p>
+      <strong>Trailer:</strong>
+      <a *ngIf="movie.trailerLink" [href]="movie.trailerLink" target="_blank" rel="noopener noreferrer">
+        Watch
+      </a>
+      <span *ngIf="!movie.trailerLink">N/A</span>
+    </p>
+    <p><strong>Synopsis:</strong> {{ movie.sypnosis || 'N/A' }}</p>
+    <p>
+      <strong>Styles:</strong>
+      {{ movie.styles && movie.styles.length > 0 ? movie.styles.join(', ') : 'N/A' }}
+    </p>
+    <p>
+      <strong>Realisators:</strong>
+      {{ movie.realisators && movie.realisators.length > 0 ? movie.realisators.join(', ') : 'N/A' }}
+    </p>
+    <p>
+      <strong>Scenarists:</strong>
+      {{ movie.scenarists && movie.scenarists.length > 0 ? movie.scenarists.join(', ') : 'N/A' }}
+    </p>
+    <p>
+      <strong>Actors:</strong>
+      {{ movie.actors && movie.actors.length > 0 ? movie.actors.join(', ') : 'N/A' }}
+    </p>
+    <p>
+      <strong>Producers:</strong>
+      {{ movie.producers && movie.producers.length > 0 ? movie.producers.join(', ') : 'N/A' }}
+    </p>
+  </div>
+</main>

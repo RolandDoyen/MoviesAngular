@@ -1,0 +1,40 @@
+<main class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All Movies</h2>
+    <a routerLink="/movies/create" class="btn btn-primary">Create</a>
+  </div>
+
+  <!-- Loading state -->
+  <app-loading *ngIf="loading" message="Waking up API... Please be patient"></app-loading>
+
+  <!-- Error state -->
+  <div *ngIf="error && !loading" class="alert alert-danger">{{ error }}</div>
+
+  <!-- Success state -->
+  <div *ngIf="!loading && !error">
+    <div *ngIf="movies.length === 0" class="alert alert-info">No movies found.</div>
+
+    <div *ngIf="movies.length > 0" class="list-group">
+      <div 
+        *ngFor="let movie of movies" 
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <a 
+          [routerLink]="['/movies', movie.id]" 
+          class="fw-bold"
+        >
+          {{ movie.title }}
+        </a>
+        
+        <div>
+          <a 
+            [routerLink]="['/movies/edit', movie.id]" 
+            class="btn btn-sm btn-secondary ms-2"
+          >
+            Edit
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
